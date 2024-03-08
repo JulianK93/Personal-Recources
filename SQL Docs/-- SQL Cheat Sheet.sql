@@ -10,11 +10,10 @@ SELECT * FROM tablename;
 SELECT (column1, column2) FROM tablename;
 
 SELECT 
-    lastName, 
-    firstName, 
-    jobTitle
+   column1,
+   column2
 FROM
-    employees;
+    tablename;
 
 -- SELECT FUNCTIONS WITHOUT TABLE - MATH, STRING & DATE FUNCTIONS
 SELECT 1+1;
@@ -38,9 +37,59 @@ ORDER BY
 
 ORDER BY column1 ASC;  ==  ORDER BY column1;
 
-ORDER BY
-   column1,
-   column2;
+-- FIELD() FUNCTION - SOrt by manual sort
+SELECT 
+  orderNumber, 
+  status
+FROM 
+  orders
+ORDER BY 
+  FIELD(
+    status, 
+    'In Process', 
+    'On Hold', 
+    'Cancelled', 
+    'Resolved', 
+    'Disputed', 
+    'Shipped'
+  );
 
--- FIELD() FUNCTION
+-- WHERE filter logic - BETWEEN, IN, LIKE, IS NOT NULL
+SELECT 
+    lastname, 
+    firstname, 
+    jobtitle,
+    officeCode
+FROM
+    employees
+WHERE
+    jobtitle = 'Sales Rep' AND 
+    officeCode = 1;
+WHERE
+    lastName LIKE '%son'
+WHERE
+    officeCode BETWEEN 1 AND 3
+WHERE
+    officeCode IN (1 , 2, 3)
+WHERE
+    sstate IS NOT NULL
+
+-- SELECT DISTINCT -- unique lists, filter double data
+
+SELECT DISTINCT
+    state, city
+FROM
+    customers
+WHERE
+    state IS NOT NULL
+ORDER BY 
+    state, 
+    city;
+
+SELECT
+customerName AS name,
+customerNumber AS number
+FROM
+customers;
+
 
